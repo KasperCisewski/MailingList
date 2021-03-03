@@ -14,7 +14,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MailingLing.Api
+namespace MailingList.Api
 {
     public class Startup
     {
