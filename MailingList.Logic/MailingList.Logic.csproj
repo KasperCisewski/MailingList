@@ -8,4 +8,11 @@
     <ProjectReference Include="..\MailingList.Data\MailingList.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="CommandHandlers\" />
+    <Folder Include="Commands\" />
+    <Folder Include="QueryHandlers\" />
+    <Folder Include="Queries\" />
+  </ItemGroup>
+
 </Project>
