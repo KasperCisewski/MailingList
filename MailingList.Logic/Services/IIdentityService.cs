@@ -1,13 +1,12 @@
-﻿using MailingList.Logic.Models.Responses;
-using System.Threading.Tasks;
+﻿using MailingList.Data.Domains;
+using MailingList.Logic.Models.Responses;
 
 namespace MailingList.Logic.Services
 {
-    public interface IIdentityService
+    public interface IIdentityService : IService
     {
-        Task<AuthenticationResult> RegisterAsync(string email, string password, string username);
-        Task<AuthenticationResult> LoginAsync(string email, string password);
-        public bool UserWithEmailExists(string email);
-        public bool UserWithUsernameExists(string username);
+        bool UserWithEmailExists(string email);
+        bool UserWithUsernameExists(string username);
+        AuthorizationSuccessResponse GenerateAuthorizationResultForUser(User user, string secret);
     }
 }

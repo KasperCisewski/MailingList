@@ -1,0 +1,16 @@
+﻿namespace MailingList.Logic.Data
+{
+    public enum LogicErrorCode : byte
+    {
+        DefaultError = 0,
+        UserNameDoesNotHaveValue,
+        LoginDoesNotHaveValue,
+        EmailDoesNotHaveValue,
+        PasswordDoesNotHaveValue,
+        UserWithSameEmailExist,
+        UserWithSameUsernameExist,
+        FailedOnUserCreation,
+        CannotFindUser,
+        NotValidatedCredentials
+    }
+}

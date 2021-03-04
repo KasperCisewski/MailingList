@@ -1,4 +1,4 @@
-﻿namespace MailingList.Logic.Models.Requests.Base
+﻿namespace MailingList.Api.Models.Requests.Base
 {
     public abstract class BasePagingListRequest
     {

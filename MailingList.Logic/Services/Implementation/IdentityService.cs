@@ -1,31 +1,59 @@
-﻿using MailingList.Logic.Models.Responses;
+﻿using MailingList.Data.Domains;
+using MailingList.Data.Repository.Abstraction;
+using MailingList.Logic.Models.Responses;
+using Microsoft.IdentityModel.Tokens;
 using System;
-using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
+using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace MailingList.Logic.Services.Implementation
 {
     public class IdentityService : IIdentityService
     {
-        public Task<AuthenticationResult> LoginAsync(string email, string password)
+        private readonly IUserRepository _userRepository;
+
+        public IdentityService(IUserRepository userRepository)
         {
-            throw new NotImplementedException();
+            _userRepository = userRepository;
+         }
+
+        public AuthorizationSuccessResponse GenerateAuthorizationResultForUser(User user, string secret)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes(secret);
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new[]
+                {
+                    new Claim(JwtRegisteredClaimNames.Sub, user.Email),
+                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                    new Claim(JwtRegisteredClaimNames.Email, user.Email),
+                    new Claim("id", user.Id.ToString())
+                }),
+                SigningCredentials = new SigningCredentials(
+                    new SymmetricSecurityKey(key),
+                    SecurityAlgorithms.HmacSha256Signature)
+            };
+
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+
+            return new AuthorizationSuccessResponse
+            {
+                Token = tokenHandler.WriteToken(token)
+            };
         }
 
-        public Task<AuthenticationResult> RegisterAsync(string email, string password, string username)
-        {
-            throw new NotImplementedException();
-        }
-
+        ////unit
         public bool UserWithEmailExists(string email)
         {
-            throw new NotImplementedException();
+            return _userRepository.GetAll().Any(u => u.Email.ToLower() == email.ToLower());
         }
 
         public bool UserWithUsernameExists(string username)
         {
-            throw new NotImplementedException();
+            return _userRepository.GetAll().Any(u => u.UserName.ToLower() == username.ToLower());
         }
     }
 }

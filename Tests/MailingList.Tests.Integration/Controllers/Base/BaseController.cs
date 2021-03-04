@@ -17,7 +17,7 @@ namespace MailingList.Tests.Integration.Controllers.Base
 
         public BaseController()
         {
-            Task.WaitAll(Task.Run(async () =>
+            Task.WaitAll(Task.Run(() =>
             {
                 Server = new TestServer(new WebHostBuilder()
                             .UseEnvironment("Test")

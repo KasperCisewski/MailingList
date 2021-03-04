@@ -4,13 +4,13 @@ using System.Threading.Tasks;
 
 namespace MailingList.Data.Repository
 {
-    public interface IRepository<T, TK> where T : IEntity<TK>
+    public interface IRepository<T, TK> where T : class
     {
-        IQueryable<IEntity<TK>> GetAll();
+        IQueryable<T> GetAll();
         Task<T> Add(T entity);
         Task Update(T entity);
-        Task Remove(IEntity<TK> entity);
+        Task Remove(T entity);
         Task RemoveById(TK id);
-        Task<IEntity<TK>> GetById(TK id);
+        Task<T> GetById(TK id);
     }
 }

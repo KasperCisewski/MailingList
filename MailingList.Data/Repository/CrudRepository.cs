@@ -1,20 +1,20 @@
-﻿using MailingList.Data.Domains.Base;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace MailingList.Data.Repository
 {
-    public abstract class CrudRepository<T, TK> : IRepository<T, TK> where T : IEntity<TK>
+    public abstract class CrudRepository<T, TK> : IRepository<T, TK> where T : class
     {
         protected readonly MailingListDbContext Context;
-        private readonly DbSet<IEntity<TK>> _table;
+        private readonly DbSet<T> _table;
 
         protected CrudRepository(MailingListDbContext context)
         {
             Context = context;
-            _table = Context.Set<IEntity<TK>>();
+            _table = Context.Set<T>();
         }
+
         public async Task<T> Add(T entity)
         {
             await _table.AddAsync(entity);
@@ -23,12 +23,12 @@ namespace MailingList.Data.Repository
             return entity;
         }
 
-        public IQueryable<IEntity<TK>> GetAll()
+        public IQueryable<T> GetAll()
         {
             return _table.AsQueryable();
         }
 
-        public async Task<IEntity<TK>> GetById(TK id)
+        public async Task<T> GetById(TK id)
         {
             var model = await _table.FindAsync(id);
 
@@ -38,7 +38,7 @@ namespace MailingList.Data.Repository
             return model;
         }
 
-        public async Task Remove(IEntity<TK> entity)
+        public async Task Remove(T entity)
         {
             _table.Remove(entity);
             await Context.SaveChangesAsync();
