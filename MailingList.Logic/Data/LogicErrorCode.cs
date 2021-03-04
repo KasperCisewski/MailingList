@@ -17,6 +17,7 @@
         PasswordDoesntHaveUpperLetter,
         PasswordDoesntHaveSpecialChar,
         PasswordDoesntHaveNumber,
-        PasswordDoesntHaveLowerChar
+        PasswordDoesntHaveLowerChar,
+        EmailShouldHaveAtChar
     }
 }

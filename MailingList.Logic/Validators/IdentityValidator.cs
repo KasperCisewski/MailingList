@@ -7,6 +7,7 @@ namespace MailingList.Logic.Validators
     public class IdentityValidator
     {
         private const int _maxPasswordLength = 50;
+
         public void ValidatePassword(string password)
         {
             if (password.Length < 8)
@@ -32,7 +33,8 @@ namespace MailingList.Logic.Validators
 
         public void ValidateEmail(string email)
         {
-
+            if (!email.Contains('@'))
+                throw new LogicException(LogicErrorCode.EmailShouldHaveAtChar, "Email should have @ char!");
         }
     }
 }
