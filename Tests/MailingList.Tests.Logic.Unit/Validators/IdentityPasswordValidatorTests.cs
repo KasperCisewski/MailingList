@@ -4,10 +4,10 @@ using Xunit;
 
 namespace MailingList.Tests.Logic.Unit.Validators
 {
-    public class IdentityValidatorTests
+    public class IdentityPasswordValidatorTests
     {
         private readonly IdentityValidator _identityValidator;
-        public IdentityValidatorTests()
+        public IdentityPasswordValidatorTests()
         {
             _identityValidator = new IdentityValidator();
         }
