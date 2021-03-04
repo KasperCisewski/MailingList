@@ -7,13 +7,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MailingList.Data", "Mailing
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{333C2DA2-5AD3-4BEC-85B6-13D8C463198C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MailingList.Tests.Integration", "Tests\MailingList.Tests.Integration\MailingList.Tests.Integration.csproj", "{31B9C456-966B-4186-A808-6A0AC814EA2D}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MailingList.Tests.Unit", "Tests\MailingList.Tests.Unit\MailingList.Tests.Unit.csproj", "{34A27D4D-B6FD-4C7A-9128-9AE0C18D2C36}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MailingList.Tests.Integration", "Tests\MailingList.Tests.Integration\MailingList.Tests.Integration.csproj", "{31B9C456-966B-4186-A808-6A0AC814EA2D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MailingList.Api", "MailingList.Api\MailingList.Api.csproj", "{EF42AA64-77EC-426B-B1FC-AC2BF829E8C9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MailingList.Logic", "MailingList.Logic\MailingList.Logic.csproj", "{4E76DFFB-7D25-49A6-8C30-AAD206242A84}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MailingList.Logic", "MailingList.Logic\MailingList.Logic.csproj", "{4E76DFFB-7D25-49A6-8C30-AAD206242A84}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MailingList.Tests.Logic.Unit", "Tests\MailingList.Tests.Logic.Unit\MailingList.Tests.Logic.Unit.csproj", "{0ECB76A6-146E-4EB6-B4CE-6CC5CDF0F3D5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,6 @@ Global
 		{31B9C456-966B-4186-A808-6A0AC814EA2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{31B9C456-966B-4186-A808-6A0AC814EA2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{31B9C456-966B-4186-A808-6A0AC814EA2D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{34A27D4D-B6FD-4C7A-9128-9AE0C18D2C36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{34A27D4D-B6FD-4C7A-9128-9AE0C18D2C36}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{34A27D4D-B6FD-4C7A-9128-9AE0C18D2C36}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{34A27D4D-B6FD-4C7A-9128-9AE0C18D2C36}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EF42AA64-77EC-426B-B1FC-AC2BF829E8C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EF42AA64-77EC-426B-B1FC-AC2BF829E8C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EF42AA64-77EC-426B-B1FC-AC2BF829E8C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -41,13 +37,17 @@ Global
 		{4E76DFFB-7D25-49A6-8C30-AAD206242A84}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4E76DFFB-7D25-49A6-8C30-AAD206242A84}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4E76DFFB-7D25-49A6-8C30-AAD206242A84}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0ECB76A6-146E-4EB6-B4CE-6CC5CDF0F3D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0ECB76A6-146E-4EB6-B4CE-6CC5CDF0F3D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0ECB76A6-146E-4EB6-B4CE-6CC5CDF0F3D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0ECB76A6-146E-4EB6-B4CE-6CC5CDF0F3D5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{31B9C456-966B-4186-A808-6A0AC814EA2D} = {333C2DA2-5AD3-4BEC-85B6-13D8C463198C}
-		{34A27D4D-B6FD-4C7A-9128-9AE0C18D2C36} = {333C2DA2-5AD3-4BEC-85B6-13D8C463198C}
+		{0ECB76A6-146E-4EB6-B4CE-6CC5CDF0F3D5} = {333C2DA2-5AD3-4BEC-85B6-13D8C463198C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F1E70D2C-5016-4883-BDEB-CE41738E9C20}

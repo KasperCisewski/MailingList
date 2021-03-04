@@ -11,6 +11,12 @@
         UserWithSameUsernameExist,
         FailedOnUserCreation,
         CannotFindUser,
-        NotValidatedCredentials
+        NotValidatedCredentials,
+        PasswordIsTooShort,
+        PasswordIsTooLong,
+        PasswordDoesntHaveUpperLetter,
+        PasswordDoesntHaveSpecialChar,
+        PasswordDoesntHaveNumber,
+        PasswordDoesntHaveAnyLowerChar
     }
 }
