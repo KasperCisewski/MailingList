@@ -39,7 +39,7 @@ namespace MailingList.Tests.Logic.Unit.Validators
 
             var exception = Assert.Throws<LogicException>(() => _identityValidator.ValidatePassword(passwordWithoutlowerChar));
 
-            Assert.Equal(LogicErrorCode.PasswordDoesntHaveAnyLowerChar, exception.ErrorCode);
+            Assert.Equal(LogicErrorCode.PasswordDoesntHaveLowerChar, exception.ErrorCode);
         }
 
         [Fact]

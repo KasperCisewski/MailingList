@@ -17,6 +17,6 @@
         PasswordDoesntHaveUpperLetter,
         PasswordDoesntHaveSpecialChar,
         PasswordDoesntHaveNumber,
-        PasswordDoesntHaveAnyLowerChar
+        PasswordDoesntHaveLowerChar
     }
 }
