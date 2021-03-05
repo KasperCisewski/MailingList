@@ -62,9 +62,11 @@ namespace MailingList.Api
                 app.UseSwagger(option => option.RouteTemplate = swaggerOptions.JsonRoute);
                 app.UseSwaggerUI(option => option.SwaggerEndpoint(swaggerOptions.UIEndpoint, swaggerOptions.Description));
             }
+
+            app.UseHttpsRedirection();
+
             app.UseRouting();
 
-            // global cors policy
             app.UseCors(x => x
                 .SetIsOriginAllowed(origin => true)
                 .AllowAnyMethod()
