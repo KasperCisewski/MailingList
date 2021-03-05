@@ -37,7 +37,7 @@ namespace MailingList.Api.Controllers
         [Authorize]
         [SwaggerResponse(HttpStatusCode.OK, "Returns list group")]
         [SwaggerResponseExample((int)HttpStatusCode.OK, typeof(SuccessfullLoginAndRegistrationExample))]
-        public async Task<IActionResult> GetGroups([FromQuery] BasePagingListRequest request)
+        public async Task<IActionResult> GetMailingGroups([FromQuery] BasePagingListRequest request)
         {
             try
             {

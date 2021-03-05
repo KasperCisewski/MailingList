@@ -3,10 +3,12 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Swashbuckle.AspNetCore.Filters;
 using Swashbuckle.Swagger.Annotations;
 using System;
 using System.Linq;
 using System.Net;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace MailingList.Api.Controllers
@@ -28,8 +30,9 @@ namespace MailingList.Api.Controllers
         [HttpGet("GetMailingEmails")]
         [Authorize]
         [SwaggerResponse(HttpStatusCode.OK, "Returns mailing emails related to mailing group")]
-        //  [SwaggerResponseExample((int)HttpStatusCode.OK, typeof(SuccessfullLoginAndRegistrationExample))]
-        public async Task<IActionResult> GetEmails(GetMailingEmailListRequestModel model)
+        //TODO
+        [SwaggerResponseExample((int)HttpStatusCode.OK, typeof(SuccessfullLoginAndRegistrationExample))]
+        public async Task<IActionResult> GetEmails([FromQuery] GetMailingEmailListRequestModel model)
         {
             var user = HttpContext.User.Claims.ToList(); ;
 
@@ -38,6 +41,7 @@ namespace MailingList.Api.Controllers
 
         [HttpPost("")]
         [Authorize]
+        [SwaggerResponseExample((int)HttpStatusCode.OK, typeof(Guid))]
         public async Task<IActionResult> Create([FromBody] MailingEmailRequestModel mailingGroupModel)
         {
             throw new NotImplementedException();
@@ -45,6 +49,7 @@ namespace MailingList.Api.Controllers
 
         [HttpPut("{id}")]
         [Authorize]
+        [SwaggerResponseExample((int)HttpStatusCode.OK, typeof(void))]
         public async Task<IActionResult> Update(Guid id, [FromBody] MailingEmailRequestModel mailingGroupModel)
         {
             throw new NotImplementedException();
@@ -52,6 +57,7 @@ namespace MailingList.Api.Controllers
 
         [HttpDelete("{id}")]
         [Authorize]
+        [SwaggerResponseExample((int)HttpStatusCode.OK, typeof(void))]
         public async Task<IActionResult> Delete(Guid id)
         {
             throw new NotImplementedException();
