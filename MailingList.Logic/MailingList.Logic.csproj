@@ -9,9 +9,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="CommandHandlers\MailingEmails\" />
     <Folder Include="Models\Responses\Base\" />
-    <Folder Include="QueryHandlers\" />
-    <Folder Include="Queries\" />
   </ItemGroup>
 
   <ItemGroup>

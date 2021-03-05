@@ -17,7 +17,7 @@ namespace MailingList.Logic.Services.Implementation
         public IdentityService(IUserRepository userRepository)
         {
             _userRepository = userRepository;
-         }
+        }
 
         public AuthorizationSuccessResponse GenerateAuthorizationResultForUser(User user, string secret)
         {
@@ -25,20 +25,14 @@ namespace MailingList.Logic.Services.Implementation
             var key = Encoding.ASCII.GetBytes(secret);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Subject = new ClaimsIdentity(new[]
+                Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(JwtRegisteredClaimNames.Sub, user.Email),
-                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                    new Claim(JwtRegisteredClaimNames.Email, user.Email),
-                    new Claim("id", user.Id.ToString())
+                    new Claim(ClaimTypes.Name, user.Id.ToString())
                 }),
-                SigningCredentials = new SigningCredentials(
-                    new SymmetricSecurityKey(key),
-                    SecurityAlgorithms.HmacSha256Signature)
+                Expires = DateTime.UtcNow.AddMinutes(15),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
-
             var token = tokenHandler.CreateToken(tokenDescriptor);
-
             return new AuthorizationSuccessResponse
             {
                 Token = tokenHandler.WriteToken(token)
