@@ -18,6 +18,8 @@
         PasswordDoesntHaveSpecialChar,
         PasswordDoesntHaveNumber,
         PasswordDoesntHaveLowerChar,
-        EmailShouldHaveAtChar
+        EmailShouldHaveAtChar,
+        DisallowToMakeChangesInOtherUserMailingGroup,
+        MailingGroupNameMustBeUnique
     }
 }

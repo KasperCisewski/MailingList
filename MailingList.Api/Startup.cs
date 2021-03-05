@@ -25,6 +25,9 @@ namespace MailingList.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors();
+
+            services.AddControllers();
+
             services.AddMvc(
                     config =>
                     {
@@ -32,14 +35,15 @@ namespace MailingList.Api
                     })
                 .SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
                 .AddControllersAsServices();
+
+            services.AddDatabaseConfiguration(_configuration, _env);
+
+            services.RegisterComponents();
+
             services.AddJwtConfiguration(_configuration);
 
             if (_env.EnvironmentName != "Test")
                 services.AddSwaggerConfiguration();
-
-            services.AddControllers();
-            services.AddDatabaseConfiguration(_configuration, _env);
-            services.RegisterComponents();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,6 +51,8 @@ namespace MailingList.Api
         {
             if (env.IsDevelopment())
                 app.UseDeveloperExceptionPage();
+            else
+                app.UseHsts();
 
             if (env.EnvironmentName != "Test")
             {
@@ -56,10 +62,17 @@ namespace MailingList.Api
                 app.UseSwagger(option => option.RouteTemplate = swaggerOptions.JsonRoute);
                 app.UseSwaggerUI(option => option.SwaggerEndpoint(swaggerOptions.UIEndpoint, swaggerOptions.Description));
             }
+            app.UseRouting();
+
+            // global cors policy
+            app.UseCors(x => x
+                .SetIsOriginAllowed(origin => true)
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowCredentials());
 
             app.UseAuthentication();
 
-            app.UseRouting();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

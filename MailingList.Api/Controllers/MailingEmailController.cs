@@ -1,11 +1,8 @@
-﻿using MailingList.Api.Examples.Identity;
-using MailingList.Api.Models.Requests.Base;
-using MailingList.Api.Models.Requests.MailingGroup;
+﻿using MailingList.Api.Models.Requests.MailingGroupEmail;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Swashbuckle.AspNetCore.Filters;
 using Swashbuckle.Swagger.Annotations;
 using System;
 using System.Linq;
@@ -17,22 +14,22 @@ namespace MailingList.Api.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [SwaggerResponse(HttpStatusCode.BadRequest, "Bad Request")]
-    public class MailingGroupController : ControllerBase
+    public class MailingEmailController : ControllerBase
     {
         private readonly ILogger<MailingGroupController> _logger;
         private readonly IMediator _mediator;
 
-        public MailingGroupController(ILogger<MailingGroupController> logger, IMediator mediator)
+        public MailingEmailController(ILogger<MailingGroupController> logger, IMediator mediator)
         {
             _logger = logger;
             _mediator = mediator;
         }
 
-        [HttpGet("GetGroups")]
+        [HttpGet("GetMailingEmails")]
         [Authorize]
-        [SwaggerResponse(HttpStatusCode.OK, "Returns list group")]
-        [SwaggerResponseExample((int)HttpStatusCode.OK, typeof(SuccessfullLoginAndRegistrationExample))]
-        public async Task<IActionResult> GetGroups(BasePagingListRequest model)
+        [SwaggerResponse(HttpStatusCode.OK, "Returns mailing emails related to mailing group")]
+        //  [SwaggerResponseExample((int)HttpStatusCode.OK, typeof(SuccessfullLoginAndRegistrationExample))]
+        public async Task<IActionResult> GetEmails(GetMailingEmailListRequestModel model)
         {
             var user = HttpContext.User.Claims.ToList(); ;
 
@@ -41,18 +38,16 @@ namespace MailingList.Api.Controllers
 
         [HttpPost("")]
         [Authorize]
-        public async Task<IActionResult> Create([FromBody] MailingGroupRequestModel mailingGroupModel)
+        public async Task<IActionResult> Create([FromBody] MailingEmailRequestModel mailingGroupModel)
         {
             throw new NotImplementedException();
-
         }
 
         [HttpPut("{id}")]
         [Authorize]
-        public async Task<IActionResult> Update(Guid id, [FromBody] MailingGroupRequestModel mailingGroupModel)
+        public async Task<IActionResult> Update(Guid id, [FromBody] MailingEmailRequestModel mailingGroupModel)
         {
             throw new NotImplementedException();
-
         }
 
         [HttpDelete("{id}")]
@@ -60,7 +55,6 @@ namespace MailingList.Api.Controllers
         public async Task<IActionResult> Delete(Guid id)
         {
             throw new NotImplementedException();
-
         }
     }
 }
