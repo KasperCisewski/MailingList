@@ -4,6 +4,7 @@ using MailingList.Api.Models.Requests.Base;
 using MailingList.Api.Models.Requests.MailingGroup;
 using MailingList.Logic.Commands.MailingGroup;
 using MailingList.Logic.Data;
+using MailingList.Logic.Queries.MailingGroup;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -12,7 +13,6 @@ using Swashbuckle.AspNetCore.Filters;
 using Swashbuckle.Swagger.Annotations;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -37,11 +37,28 @@ namespace MailingList.Api.Controllers
         [Authorize]
         [SwaggerResponse(HttpStatusCode.OK, "Returns list group")]
         [SwaggerResponseExample((int)HttpStatusCode.OK, typeof(SuccessfullLoginAndRegistrationExample))]
-        public async Task<IActionResult> GetGroups([FromQuery] BasePagingListRequest model)
+        public async Task<IActionResult> GetGroups([FromQuery] BasePagingListRequest request)
         {
-            var user = HttpContext.User.Claims.ToList(); ;
-
-            throw new NotImplementedException();
+            try
+            {
+                var userId = HttpContext.GetUserId();
+                return Ok(await _mediator.Send(new GetMailingGroupsQuery()
+                {
+                    UserId = userId,
+                    Skip = request.Skip,
+                    Take = request.Take
+                }));
+            }
+            catch (LogicException ex)
+            {
+                _logger.LogError(ex.ToString());
+                return BadRequest(new Dictionary<LogicErrorCode, string>() { { ex.ErrorCode, ex.Message } });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.ToString());
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpPost("")]
