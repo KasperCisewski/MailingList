@@ -10,7 +10,7 @@ namespace MailingList.Api.Controllers.Base
     {
         protected readonly ILogger<T> Logger;
 
-        public BaseApiController(ILogger<T> logger)
+        protected BaseApiController(ILogger<T> logger)
         {
             Logger = logger;
         }

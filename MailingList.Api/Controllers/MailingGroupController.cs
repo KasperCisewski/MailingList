@@ -51,7 +51,7 @@ namespace MailingList.Api.Controllers
             }
         }
 
-        [HttpPost("")]
+        [HttpPost]
         [Authorize]
         [SwaggerResponseExample((int)HttpStatusCode.OK, typeof(Guid))]
         [SwaggerResponse((int)HttpStatusCode.OK)]

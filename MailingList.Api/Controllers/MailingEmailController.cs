@@ -32,7 +32,7 @@ namespace MailingList.Api.Controllers
         [SwaggerResponse((int)HttpStatusCode.OK, "Returns mailing emails related to mailing group")]
         //TODO
           //  [SwaggerResponseExample((int)HttpStatusCode.OK, typeof(MailingEmailListExample))]
-        public async Task<IActionResult> GetEmails([FromQuery] GetMailingEmailListRequestModel request)
+        public async Task<IActionResult> GetMailingEmails([FromQuery] GetMailingEmailListRequestModel request)
         {
             try
             {
@@ -51,7 +51,7 @@ namespace MailingList.Api.Controllers
             }
         }
 
-        [HttpPost("")]
+        [HttpPost]
         [Authorize]
         [SwaggerResponseExample((int)HttpStatusCode.OK, typeof(Guid))]
         public async Task<IActionResult> Create([FromBody] MailingEmailRequestModel request)
