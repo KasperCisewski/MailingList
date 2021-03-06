@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace MailingList.Logic.CommandHandlers.MailingGroup
 {
-    class DeleteMailingGroupCommandHandler : IRequestHandler<DeleteMailingGroupCommand>
+    internal class DeleteMailingGroupCommandHandler : IRequestHandler<DeleteMailingGroupCommand>
     {
         private readonly IMailingGroupRepository _mailingGroupRepository;
         private readonly IMailingEmailGroupRepository _mailingEmailGroupRepository;

@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace MailingList.Logic.CommandHandlers.Identity
 {
-    class LoginCommandHandler : IRequestHandler<LoginCommand, AuthorizationSuccessResponse>
+    internal class LoginCommandHandler : IRequestHandler<LoginCommand, AuthorizationSuccessResponse>
     {
         private readonly IIdentityService _identityService;
         private readonly IUserRepository _userRepository;

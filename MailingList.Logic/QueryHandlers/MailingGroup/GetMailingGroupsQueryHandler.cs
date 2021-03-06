@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace MailingList.Logic.QueryHandlers.MailingGroup
 {
-    public class GetMailingGroupsQueryHandler : IRequestHandler<GetMailingGroupsQuery, List<MailingGroupModel>>
+    internal class GetMailingGroupsQueryHandler : IRequestHandler<GetMailingGroupsQuery, IEnumerable<MailingGroupModel>>
     {
         private readonly IMailingGroupRepository _mailingGroupRepository;
 
@@ -19,7 +19,7 @@ namespace MailingList.Logic.QueryHandlers.MailingGroup
             _mailingGroupRepository = mailingGroupRepository;
         }
 
-        public async Task<List<MailingGroupModel>> Handle(GetMailingGroupsQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<MailingGroupModel>> Handle(GetMailingGroupsQuery request, CancellationToken cancellationToken)
         {
             return await _mailingGroupRepository.GetAll()
                         .Where(mg => mg.UserId == request.UserId)

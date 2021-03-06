@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace MailingList.Logic.CommandHandlers.Identity
 {
-    class RegisterCommandHandler : IRequestHandler<RegisterCommand, AuthorizationSuccessResponse>
+    internal class RegisterCommandHandler : IRequestHandler<RegisterCommand, AuthorizationSuccessResponse>
     {
         private readonly IIdentityService _identityService;
         private readonly IdentityValidator _identityValidator;
