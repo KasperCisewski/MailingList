@@ -3,7 +3,7 @@ using MailingList.Logic.Models.Responses;
 
 namespace MailingList.Logic.Services
 {
-    public interface IIdentityService : IService
+    internal interface IIdentityService : IService
     {
         bool UserWithEmailExists(string email);
         bool UserWithUsernameExists(string username);

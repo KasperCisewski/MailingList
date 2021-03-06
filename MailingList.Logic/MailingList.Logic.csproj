@@ -9,13 +9,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="CommandHandlers\MailingEmails\" />
-    <Folder Include="Models\Responses\Base\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="MediatR" Version="9.0.0" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+      <_Parameter1>MailingList.Tests.Logic.Unit</_Parameter1>
+    </AssemblyAttribute>
+  </ItemGroup>
+	
 </Project>

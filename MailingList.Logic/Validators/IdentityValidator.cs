@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 
 namespace MailingList.Logic.Validators
 {
-    public class IdentityValidator
+    internal class IdentityValidator
     {
         private const int _maxPasswordLength = 50;
 

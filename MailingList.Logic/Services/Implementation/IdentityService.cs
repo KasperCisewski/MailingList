@@ -10,7 +10,7 @@ using System.Text;
 
 namespace MailingList.Logic.Services.Implementation
 {
-    public class IdentityService : IIdentityService
+    internal class IdentityService : IIdentityService
     {
         private readonly IUserRepository _userRepository;
 
