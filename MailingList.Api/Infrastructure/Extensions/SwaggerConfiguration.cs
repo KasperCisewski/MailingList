@@ -33,6 +33,8 @@ namespace MailingList.Api.Infrastructure.Extensions
                         Type = ReferenceType.SecurityScheme
                     }}, new List<string>()}
                 });
+
+                x.EnableAnnotations();
             });
 
             return services;

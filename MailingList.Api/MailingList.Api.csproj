@@ -23,5 +23,4 @@
   <ItemGroup>
     <ProjectReference Include="..\MailingList.Logic\MailingList.Logic.csproj" />
   </ItemGroup>
-
 </Project>

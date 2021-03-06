@@ -34,6 +34,10 @@ namespace MailingList.Api
                         config.EnableEndpointRouting = false;
                     })
                 .SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
+                .ConfigureApiBehaviorOptions(options =>
+                {
+                    options.SuppressMapClientErrors = true;
+                })
                 .AddControllersAsServices();
 
             services.AddDatabaseConfiguration(_configuration, _env);

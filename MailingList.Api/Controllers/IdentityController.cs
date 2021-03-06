@@ -1,5 +1,4 @@
 ﻿using MailingList.Api.Controllers.Base;
-using MailingList.Api.Examples.Identity;
 using MailingList.Api.Infrastructure.Options;
 using MailingList.Api.Models.Requests.Identity;
 using MailingList.Logic.Commands.Identity;
@@ -7,7 +6,6 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Swashbuckle.AspNetCore.Annotations;
-using Swashbuckle.AspNetCore.Filters;
 using System;
 using System.Net;
 using System.Threading.Tasks;
@@ -30,7 +28,6 @@ namespace MailingList.Api.Controllers
 
         [HttpPost("Register")]
         [SwaggerResponse((int)HttpStatusCode.OK, "Returns token")]
-        [SwaggerResponseExample((int)HttpStatusCode.OK, typeof(SuccessfullLoginAndRegistrationExample))]
         public async Task<IActionResult> Register([FromBody] UserRegistrationRequest request)
         {
             try
@@ -51,7 +48,6 @@ namespace MailingList.Api.Controllers
 
         [HttpPost("Login")]
         [SwaggerResponse((int)HttpStatusCode.OK, "Returns token")]
-        [SwaggerResponseExample((int)HttpStatusCode.OK, typeof(SuccessfullLoginAndRegistrationExample))]
         public async Task<IActionResult> Login([FromBody] UserLoginRequest request)
         {
             try

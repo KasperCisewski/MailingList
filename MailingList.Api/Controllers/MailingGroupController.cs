@@ -18,6 +18,7 @@ namespace MailingList.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [SwaggerResponse((int)HttpStatusCode.Unauthorized, "Unauthorized")]
     public class MailingGroupController : BaseApiController<MailingGroupController>
     {
         private readonly IMediator _mediator;
@@ -31,7 +32,7 @@ namespace MailingList.Api.Controllers
         [Authorize]
         [SwaggerResponse((int)HttpStatusCode.OK, "Returns list group")]
         [SwaggerResponse((int)HttpStatusCode.BadRequest, "Bad Request")]
-        [SwaggerResponse((int)HttpStatusCode.Unauthorized)]
+        [SwaggerResponse((int)HttpStatusCode.Unauthorized, "Unauthorized")]
         //    [SwaggerResponseExample((int)HttpStatusCode.OK, typeof(MailingGroupListExample))]
         public async Task<IActionResult> GetMailingGroups([FromQuery] BasePagingListRequest request)
         {
