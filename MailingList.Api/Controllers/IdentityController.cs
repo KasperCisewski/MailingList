@@ -1,15 +1,14 @@
-﻿using MailingList.Api.Examples.Identity;
+﻿using MailingList.Api.Controllers.Base;
+using MailingList.Api.Examples.Identity;
 using MailingList.Api.Infrastructure.Options;
 using MailingList.Api.Models.Requests.Identity;
 using MailingList.Logic.Commands.Identity;
-using MailingList.Logic.Data;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Swashbuckle.AspNetCore.Annotations;
 using Swashbuckle.AspNetCore.Filters;
 using System;
-using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -18,17 +17,15 @@ namespace MailingList.Api.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [SwaggerResponse((int)HttpStatusCode.BadRequest, "Bad Request")]
-    public class IdentityController : ControllerBase
+    public class IdentityController : BaseApiController<IdentityController>
     {
         private readonly JwtOptions _jwtOptions;
         private readonly IMediator _mediator;
-        private readonly ILogger<IdentityController> _logger;
 
-        public IdentityController(JwtOptions jwtOptions, IMediator mediator, ILogger<IdentityController> logger)
+        public IdentityController(JwtOptions jwtOptions, IMediator mediator, ILogger<IdentityController> logger) : base(logger)
         {
             _jwtOptions = jwtOptions;
             _mediator = mediator;
-            _logger = logger;
         }
 
         [HttpPost("Register")]
@@ -46,15 +43,9 @@ namespace MailingList.Api.Controllers
                     Secret = _jwtOptions.Secret
                 }));
             }
-            catch (LogicException ex)
-            {
-                _logger.LogError(ex.ToString());
-                return BadRequest(new Dictionary<LogicErrorCode, string>() { { ex.ErrorCode, ex.Message } });
-            }
             catch (Exception ex)
             {
-                _logger.LogError(ex.ToString());
-                return BadRequest(ex.Message);
+                return ProcessErrorResponse(ex);
             }
         }
 
@@ -72,15 +63,9 @@ namespace MailingList.Api.Controllers
                     Secret = _jwtOptions.Secret
                 }));
             }
-            catch (LogicException ex)
-            {
-                _logger.LogError(ex.ToString());
-                return BadRequest(new Dictionary<LogicErrorCode, string>() { { ex.ErrorCode, ex.Message } });
-            }
             catch (Exception ex)
             {
-                _logger.LogError(ex.ToString());
-                return BadRequest(ex.Message);
+                return ProcessErrorResponse(ex);
             }
         }
     }
