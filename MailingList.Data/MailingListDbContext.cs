@@ -10,7 +10,7 @@ namespace MailingList.Data
     {
         public DbSet<MailingGroup> MailingGroup { get; set; }
         public DbSet<MailingEmail> MailingEmail { get; set; }
-        public DbSet<MailingEmailGroup> MailingEmailGroups { get; set; }
+        public DbSet<MailingEmailGroup> MailingEmailGroup { get; set; }
 
         public MailingListDbContext(DbContextOptions options) : base(options)
         {
@@ -25,7 +25,7 @@ namespace MailingList.Data
             builder.Entity<IdentityUserRole<Guid>>().ToTable("UserRole");
             builder.Entity<IdentityUserClaim<Guid>>().ToTable("UserClaim");
             builder.Entity<IdentityUserLogin<Guid>>().ToTable("UserLogin");
-            builder.Entity<IdentityRoleClaim<Guid>>().ToTable("RoleClaims");
+            builder.Entity<IdentityRoleClaim<Guid>>().ToTable("RoleClaim");
             builder.Entity<IdentityUserToken<Guid>>().ToTable("UserToken");
 
             builder.Entity<MailingGroup>().HasIndex(mailingGroup => mailingGroup.Name).IsUnique();

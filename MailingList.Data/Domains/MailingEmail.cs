@@ -10,6 +10,6 @@ namespace MailingList.Data.Domains
 
         public string Email { get; set; }
 
-        public List<MailingEmailGroup> MailingEmailGroups { get; set; }
+        public IEnumerable<MailingEmailGroup> MailingEmailGroups { get; set; }
     }
 }

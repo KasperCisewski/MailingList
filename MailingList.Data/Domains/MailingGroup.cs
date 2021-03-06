@@ -16,6 +16,6 @@ namespace MailingList.Data.Domains
 
         public virtual User User { get; set; }
 
-        public List<MailingEmailGroup> MailingEmailGroups { get; set; }
+        public IEnumerable<MailingEmailGroup> MailingEmailGroups { get; set; }
     }
 }
