@@ -6,8 +6,8 @@ using MailingList.Logic.Data;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Swashbuckle.AspNetCore.Annotations;
 using Swashbuckle.AspNetCore.Filters;
-using Swashbuckle.Swagger.Annotations;
 using System;
 using System.Collections.Generic;
 using System.Net;
@@ -17,7 +17,7 @@ namespace MailingList.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [SwaggerResponse(HttpStatusCode.BadRequest, "Bad Request")]
+    [SwaggerResponse((int)HttpStatusCode.BadRequest, "Bad Request")]
     public class IdentityController : ControllerBase
     {
         private readonly JwtOptions _jwtOptions;
@@ -32,7 +32,7 @@ namespace MailingList.Api.Controllers
         }
 
         [HttpPost("Register")]
-        [SwaggerResponse(HttpStatusCode.OK, "Returns token")]
+        [SwaggerResponse((int)HttpStatusCode.OK, "Returns token")]
         [SwaggerResponseExample((int)HttpStatusCode.OK, typeof(SuccessfullLoginAndRegistrationExample))]
         public async Task<IActionResult> Register([FromBody] UserRegistrationRequest request)
         {
@@ -59,7 +59,7 @@ namespace MailingList.Api.Controllers
         }
 
         [HttpPost("Login")]
-        [SwaggerResponse(HttpStatusCode.OK, "Returns token")]
+        [SwaggerResponse((int)HttpStatusCode.OK, "Returns token")]
         [SwaggerResponseExample((int)HttpStatusCode.OK, typeof(SuccessfullLoginAndRegistrationExample))]
         public async Task<IActionResult> Login([FromBody] UserLoginRequest request)
         {
