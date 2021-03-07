@@ -1,7 +1,9 @@
 ﻿using MailingList.Api.Controllers.Base;
 using MailingList.Api.Infrastructure.Options;
+using MailingList.Api.Models;
 using MailingList.Api.Models.Requests.Identity;
 using MailingList.Logic.Commands.Identity;
+using MailingList.Logic.Models.Responses;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -26,8 +28,13 @@ namespace MailingList.Api.Controllers
             _mediator = mediator;
         }
 
+        /// <summary>
+        /// Method used to user registration
+        /// </summary>
+        /// <returns>JWT authorization token</returns>
         [HttpPost("Register")]
-        [SwaggerResponse((int)HttpStatusCode.OK, "Returns token")]
+        [SwaggerResponse((int)HttpStatusCode.OK, "Returns authorization token", typeof(AuthorizationSuccessResponse))]
+        [SwaggerResponse((int)HttpStatusCode.BadRequest, "Bad Request", typeof(ApiErrorResultModel))]
         public async Task<IActionResult> Register([FromBody] UserRegistrationRequest request)
         {
             try
@@ -46,8 +53,13 @@ namespace MailingList.Api.Controllers
             }
         }
 
+        /// <summary>
+        /// Method used to user login into app
+        /// </summary>
+        /// <returns>JWT authorization token</returns>
         [HttpPost("Login")]
-        [SwaggerResponse((int)HttpStatusCode.OK, "Returns token")]
+        [SwaggerResponse((int)HttpStatusCode.OK, "Returns authorization token", typeof(AuthorizationSuccessResponse))]
+        [SwaggerResponse((int)HttpStatusCode.BadRequest, "Bad Request", typeof(ApiErrorResultModel))]
         public async Task<IActionResult> Login([FromBody] UserLoginRequest request)
         {
             try

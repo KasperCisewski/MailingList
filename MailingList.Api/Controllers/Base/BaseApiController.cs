@@ -22,7 +22,7 @@ namespace MailingList.Api.Controllers.Base
             return BadRequest(new ApiErrorResultModel()
             {
                 LogicErrorCode = ex is LogicException ? (ex as LogicException).ErrorCode : LogicErrorCode.DefaultError,
-                LogicErrorCodeDescription = ex is LogicException ? (ex as LogicException).ToString() : LogicErrorCode.DefaultError.ToString(),
+                LogicErrorCodeDescription = ex is LogicException ? (ex as LogicException).ErrorCode.ToString() : LogicErrorCode.DefaultError.ToString(),
                 ErrorMessage = ex.Message
             });
         }

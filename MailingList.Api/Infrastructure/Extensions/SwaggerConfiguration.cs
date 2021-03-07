@@ -1,6 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
+using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Reflection;
 
 namespace MailingList.Api.Infrastructure.Extensions
 {
@@ -34,8 +37,15 @@ namespace MailingList.Api.Infrastructure.Extensions
                     }}, new List<string>()}
                 });
 
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+
+                x.IncludeXmlComments(xmlPath);
+
                 x.EnableAnnotations();
             });
+
+            services.AddSwaggerGenNewtonsoftSupport();
 
             return services;
         }

@@ -1,5 +1,6 @@
 ﻿using MailingList.Api.Controllers.Base;
 using MailingList.Api.Infrastructure.Extensions;
+using MailingList.Api.Models;
 using MailingList.Api.Models.Requests.Base;
 using MailingList.Api.Models.Requests.MailingGroup;
 using MailingList.Logic.Commands.MailingGroup;
@@ -10,9 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Swashbuckle.AspNetCore.Annotations;
-using Swashbuckle.AspNetCore.Filters;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
@@ -21,7 +20,6 @@ namespace MailingList.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [SwaggerResponse((int)HttpStatusCode.Unauthorized, "Unauthorized")]
     public class MailingGroupController : BaseApiController<MailingGroupController>
     {
         private readonly IMediator _mediator;
@@ -31,34 +29,36 @@ namespace MailingList.Api.Controllers
             _mediator = mediator;
         }
 
+        /// <summary>
+        /// Method used to get mailing groups for user
+        /// </summary>
+        /// <param name="take">How many mailing email we can take</param>
+        /// <param name="skip">How many mailing email we need to skip</param>
+        /// <returns>Paginated mailing groups list</returns>
         [HttpGet("GetMailingGroups")]
         [Authorize]
-        [SwaggerResponse((int)HttpStatusCode.OK, "Returns list group")]
-        [SwaggerResponse((int)HttpStatusCode.BadRequest, "Bad Request")]
+        [SwaggerResponse((int)HttpStatusCode.OK, "Returns list group", typeof(IEnumerable<MailingGroupModel>))]
         [SwaggerResponse((int)HttpStatusCode.Unauthorized, "Unauthorized")]
         public async Task<IActionResult> GetMailingGroups([FromQuery] BasePagingListRequest request)
         {
-            try
+            var userId = HttpContext.GetUserId();
+            return Ok(await _mediator.Send<IEnumerable<MailingGroupModel>>(new GetMailingGroupsQuery()
             {
-                var userId = HttpContext.GetUserId();
-                return Ok(await _mediator.Send<IEnumerable<MailingGroupModel>>(new GetMailingGroupsQuery()
-                {
-                    UserId = userId,
-                    Skip = request.Skip,
-                    Take = request.Take
-                }));
-            }
-            catch (Exception ex)
-            {
-                return ProcessErrorResponse(ex);
-            }
+                UserId = userId,
+                Skip = request.Skip,
+                Take = request.Take
+            }));
         }
 
+        /// <summary>
+        /// Method used to create mailing group
+        /// </summary>
+        /// <param></param>
+        /// <returns>Created mailing group id</returns>
         [HttpPost]
         [Authorize]
-        [SwaggerResponseExample((int)HttpStatusCode.OK, typeof(Guid))]
-        [SwaggerResponse((int)HttpStatusCode.OK)]
-        [SwaggerResponse((int)HttpStatusCode.BadRequest, "Bad Request")]
+        [SwaggerResponse((int)HttpStatusCode.OK, type: typeof(Guid))]
+        [SwaggerResponse((int)HttpStatusCode.BadRequest, "Bad Request", typeof(ApiErrorResultModel))]
         [SwaggerResponse((int)HttpStatusCode.Unauthorized, "Unauthorized")]
         public async Task<IActionResult> Create([FromBody] MailingGroupRequestModel request)
         {
@@ -77,11 +77,15 @@ namespace MailingList.Api.Controllers
             }
         }
 
+        /// <summary>
+        /// Method used to update mailing group
+        /// </summary>
+        /// <param name="id">Mailing group id</param>
+        /// <returns></returns>
         [HttpPut("{id}")]
         [Authorize]
-        [SwaggerResponseExample((int)HttpStatusCode.OK, typeof(void))]
-        [SwaggerResponse((int)HttpStatusCode.OK)]
-        [SwaggerResponse((int)HttpStatusCode.BadRequest, "Bad Request")]
+        [SwaggerResponse((int)HttpStatusCode.OK, type: typeof(void))]
+        [SwaggerResponse((int)HttpStatusCode.BadRequest, "Bad Request", typeof(ApiErrorResultModel))]
         [SwaggerResponse((int)HttpStatusCode.Unauthorized, "Unauthorized")]
         public async Task<IActionResult> Update(Guid id, [FromBody] MailingGroupRequestModel request)
         {
@@ -101,11 +105,15 @@ namespace MailingList.Api.Controllers
             }
         }
 
+        /// <summary>
+        /// Method used delete mailing group
+        /// </summary>
+        /// <param name="id">Mailing group id</param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
         [Authorize]
-        [SwaggerResponseExample((int)HttpStatusCode.OK, typeof(void))]
-        [SwaggerResponse((int)HttpStatusCode.OK)]
-        [SwaggerResponse((int)HttpStatusCode.BadRequest, "Bad Request")]
+        [SwaggerResponse((int)HttpStatusCode.OK, type: typeof(void))]
+        [SwaggerResponse((int)HttpStatusCode.BadRequest, "Bad Request", typeof(ApiErrorResultModel))]
         [SwaggerResponse((int)HttpStatusCode.Unauthorized, "Unauthorized")]
         public async Task<IActionResult> Delete(Guid id)
         {

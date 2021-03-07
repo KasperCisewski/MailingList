@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json.Converters;
+using System.Text.Json.Serialization;
 
 namespace MailingList.Api
 {
@@ -26,7 +28,9 @@ namespace MailingList.Api
         {
             services.AddCors();
 
-            services.AddControllers();
+            services.AddControllers()
+                    .AddNewtonsoftJson(options =>
+                        options.SerializerSettings.Converters.Add(new StringEnumConverter()));
 
             services.AddMvc(
                     config =>

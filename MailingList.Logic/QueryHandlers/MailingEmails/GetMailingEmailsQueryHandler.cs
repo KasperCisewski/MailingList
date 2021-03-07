@@ -31,7 +31,7 @@ namespace MailingList.Logic.QueryHandlers.MailingEmails
             return mailingGroup.MailingEmailGroups
                 .Where(meg => meg.MailingGroup.UserId == request.UserId)
                 .Take(request.Take)
-                .Skip(request.Skip)
+                .Skip(request.Skip * request.Take)
                 .Select(meg => new MailingEmailModel()
                 {
                     Email = meg.MailingEmail.Email,
