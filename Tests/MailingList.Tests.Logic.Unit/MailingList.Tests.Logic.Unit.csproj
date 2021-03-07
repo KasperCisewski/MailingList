@@ -24,4 +24,8 @@
     <ProjectReference Include="..\..\MailingList.Logic\MailingList.Logic.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Extensions\" />
+  </ItemGroup>
+
 </Project>

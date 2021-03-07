@@ -39,7 +39,6 @@ namespace MailingList.Logic.Services.Implementation
             };
         }
 
-        ////unit
         public bool UserWithEmailExists(string email)
         {
             return _userRepository.GetAll().Any(u => u.Email.ToLower() == email.ToLower());
