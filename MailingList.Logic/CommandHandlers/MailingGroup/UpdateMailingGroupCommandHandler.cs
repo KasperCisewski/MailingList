@@ -24,7 +24,13 @@ namespace MailingList.Logic.CommandHandlers.MailingGroup
             var mailingGroup = await _mailingGroupRepository.GetById(request.MailingGroupId);
 
             if (mailingGroup.UserId != request.UserId)
-                throw new LogicException(LogicErrorCode.DisallowToMakeChangesInOtherUserMailingGroup, "Could not update mailing group which is not belong to us");
+                throw new LogicException(LogicErrorCode.DisallowToMakeChangesInOtherUserMailingGroup, "Could not update mailing group which is not belong to user");
+
+            if (mailingGroup == null)
+                throw new LogicException(LogicErrorCode.CouldNotFindMailingGroup, $"Could not found mailing group with id '{request.MailingGroupId}'");
+
+            if (mailingGroup.Name != request.NewName)
+                throw new LogicException(LogicErrorCode.NewNameAndOldNameShouldBeDifferent, "Could not update group name to exactly same group name");
 
             _mailingGroupService.CheckMailingGroupIsUnique(request.NewName);
 

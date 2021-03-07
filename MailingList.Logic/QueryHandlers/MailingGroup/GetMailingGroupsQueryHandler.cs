@@ -29,7 +29,8 @@ namespace MailingList.Logic.QueryHandlers.MailingGroup
                         {
                             Id = mg.Id,
                             Name = mg.Name
-                        }).ToListAsync();
+                        })
+                        .ToListAsync();
         }
     }
 }

@@ -16,7 +16,7 @@ namespace MailingList.Api.Infrastructure.Extensions
                  .SelectMany(t => t.GetTypes());
 
             var repositoryTypesList = domainAssembliesTypes
-                 .Where(t => t.IsClass && t.Namespace == "MailingList.Data.Repository.Implementation").ToList();
+                 .Where(t => t.IsClass && t.Namespace == "MailingList.Data.Repository.Implementation").ToArray();
 
             services.Scan(scan => scan
                  .FromAssembliesOf(repositoryTypesList)
@@ -27,7 +27,7 @@ namespace MailingList.Api.Infrastructure.Extensions
             services.AddTransient<IdentityValidator>();
 
             var serviceTypesList = domainAssembliesTypes
-                .Where(t => t.IsClass && t.Namespace == "MailingList.Logic.Services.Implementation").ToList();
+                .Where(t => t.IsClass && t.Namespace == "MailingList.Logic.Services.Implementation").ToArray();
 
             services.Scan(scan => scan
                 .FromAssembliesOf(serviceTypesList)
@@ -35,10 +35,12 @@ namespace MailingList.Api.Infrastructure.Extensions
                 .AsImplementedInterfaces()
                 .WithTransientLifetime());
 
-            var commandsTypesList = domainAssembliesTypes
-                .Where(t => t.IsClass && t.Namespace != null && t.Namespace.StartsWith("MailingList.Logic.CommandHandlers")).ToArray();
+            var commandHandlerAndQueryHandlerTypes = domainAssembliesTypes
+                .Where(t => t.IsClass && t.Namespace != null &&
+                (t.Namespace.StartsWith("MailingList.Logic.CommandHandlers") || t.Namespace.StartsWith("MailingList.Logic.QueryHandlers")))
+                .ToArray();
 
-            services.AddMediatR(commandsTypesList);
+            services.AddMediatR(commandHandlerAndQueryHandlerTypes);
 
             return services;
         }
