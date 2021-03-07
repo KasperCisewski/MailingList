@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Xunit;
 
-namespace MailingList.Tests.Integration.Validators
+namespace MailingList.Tests.Integration.Infrastructure.Validators
 {
     public class ApiRequestValidator
     {

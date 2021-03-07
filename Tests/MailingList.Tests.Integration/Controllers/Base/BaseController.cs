@@ -1,6 +1,6 @@
 ﻿using MailingList.Api;
 using MailingList.Data;
-using MailingList.Tests.Integration.Validators;
+using MailingList.Tests.Integration.Infrastructure.Validators;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
