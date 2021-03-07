@@ -20,6 +20,11 @@
         PasswordDoesntHaveLowerChar,
         EmailShouldHaveAtChar,
         DisallowToMakeChangesInOtherUserMailingGroup,
-        MailingGroupNameMustBeUnique
+        MailingGroupNameMustBeUnique,
+        CouldNotFindMailingGroup,
+        MailingEmailGrourExist,
+        CannotFindMailingEmail,
+        NewNameAndOldNameShouldBeDifferent,
+        CannotFindMailingGroup
     }
 }

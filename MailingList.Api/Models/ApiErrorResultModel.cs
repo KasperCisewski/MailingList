@@ -6,5 +6,6 @@ namespace MailingList.Api.Models
     {
         public LogicErrorCode LogicErrorCode { get; set; }
         public string ErrorMessage { get; set; }
+        public string LogicErrorCodeDescription { get; set; }
     }
 }

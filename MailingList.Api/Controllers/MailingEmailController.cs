@@ -2,6 +2,7 @@
 using MailingList.Api.Infrastructure.Extensions;
 using MailingList.Api.Models.Requests.MailingGroupEmail;
 using MailingList.Logic.Commands.MailingEmail;
+using MailingList.Logic.Models.Responses;
 using MailingList.Logic.Queries.MailingEmail;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -10,6 +11,7 @@ using Microsoft.Extensions.Logging;
 using Swashbuckle.AspNetCore.Annotations;
 using Swashbuckle.AspNetCore.Filters;
 using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -36,7 +38,7 @@ namespace MailingList.Api.Controllers
             try
             {
                 var userId = HttpContext.GetUserId();
-                return Ok(await _mediator.Send(new GetMailingEmailsQuery()
+                return Ok(await _mediator.Send<IEnumerable<MailingEmailModel>>(new GetMailingEmailsQuery()
                 {
                     UserId = userId,
                     MailingGroupId = request.MailingGroupId,
