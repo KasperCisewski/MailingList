@@ -11,6 +11,7 @@ Mailing list application using ASP .NET Core 3.1
 ## Technologies
 Project is created with:
 * ASP .NET Core 3.1
+* MediatR to use CQRS
 	
 ## Setup
 
