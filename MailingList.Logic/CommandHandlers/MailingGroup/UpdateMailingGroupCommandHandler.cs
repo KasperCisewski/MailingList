@@ -29,7 +29,7 @@ namespace MailingList.Logic.CommandHandlers.MailingGroup
             if (mailingGroup == null)
                 throw new LogicException(LogicErrorCode.CouldNotFindMailingGroup, $"Could not found mailing group with id '{request.MailingGroupId}'");
 
-            if (mailingGroup.Name != request.NewName)
+            if (mailingGroup.Name == request.NewName)
                 throw new LogicException(LogicErrorCode.NewNameAndOldNameShouldBeDifferent, "Could not update group name to exactly same group name");
 
             _mailingGroupService.CheckMailingGroupIsUnique(request.NewName);

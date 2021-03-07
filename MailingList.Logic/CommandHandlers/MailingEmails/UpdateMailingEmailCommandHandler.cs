@@ -36,7 +36,7 @@ namespace MailingList.Logic.CommandHandlers.MailingEmails
             if (mailingEmail == null)
                 throw new LogicException(LogicErrorCode.CannotFindMailingEmail, $"Could not find mailing email with id {request.MailingEmailId}");
 
-            if (mailingEmail.Email != request.NewEmailName)
+            if (mailingEmail.Email == request.NewEmailName)
                 throw new LogicException(LogicErrorCode.NewNameAndOldNameShouldBeDifferent, "Could not update mailing email to exactly same mailing email");
 
             var mailingGroup = await _mailingGroupRepository.GetAll().FirstOrDefaultAsync(mg => mg.Id == request.MailingGroupId);

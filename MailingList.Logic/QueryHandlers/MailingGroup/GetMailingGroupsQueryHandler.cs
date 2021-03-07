@@ -23,8 +23,8 @@ namespace MailingList.Logic.QueryHandlers.MailingGroup
         {
             return await _mailingGroupRepository.GetAll()
                         .Where(mg => mg.UserId == request.UserId)
-                        .Take(request.Take)
                         .Skip(request.Skip * request.Take)
+                        .Take(request.Take)
                         .Select(mg => new MailingGroupModel()
                         {
                             Id = mg.Id,
