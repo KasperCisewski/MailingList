@@ -21,7 +21,7 @@ namespace MailingList.Api.Controllers.Base
 
             return BadRequest(new ApiErrorResultModel()
             {
-                LogicErrorCode = ex is LogicException ? (ex as LogicException).ErrorCode : LogicErrorCode.DefaultError,
+                LogicErrorCode = ex is LogicException ? (int)(ex as LogicException).ErrorCode : (int)LogicErrorCode.DefaultError,
                 LogicErrorCodeDescription = ex is LogicException ? (ex as LogicException).ErrorCode.ToString() : LogicErrorCode.DefaultError.ToString(),
                 ErrorMessage = ex.Message
             });
