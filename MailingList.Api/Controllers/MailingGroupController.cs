@@ -84,7 +84,7 @@ namespace MailingList.Api.Controllers
         /// <returns></returns>
         [HttpPut("{id}")]
         [Authorize]
-        [SwaggerResponse((int)HttpStatusCode.OK, type: typeof(void))]
+        [SwaggerResponse((int)HttpStatusCode.NoContent, type: typeof(void))]
         [SwaggerResponse((int)HttpStatusCode.BadRequest, "Bad Request", typeof(ApiErrorResultModel))]
         [SwaggerResponse((int)HttpStatusCode.Unauthorized, "Unauthorized")]
         public async Task<IActionResult> Update(Guid id, [FromBody] MailingGroupRequestModel request)
@@ -92,12 +92,14 @@ namespace MailingList.Api.Controllers
             try
             {
                 var userId = HttpContext.GetUserId();
-                return Ok(await _mediator.Send(new UpdateMailingGroupCommand()
+                await _mediator.Send(new UpdateMailingGroupCommand()
                 {
                     UserId = userId,
                     MailingGroupId = id,
                     NewName = request.Name
-                }));
+                });
+
+                return NoContent();
             }
             catch (Exception ex)
             {
@@ -112,7 +114,7 @@ namespace MailingList.Api.Controllers
         /// <returns></returns>
         [HttpDelete("{id}")]
         [Authorize]
-        [SwaggerResponse((int)HttpStatusCode.OK, type: typeof(void))]
+        [SwaggerResponse((int)HttpStatusCode.NoContent, type: typeof(void))]
         [SwaggerResponse((int)HttpStatusCode.BadRequest, "Bad Request", typeof(ApiErrorResultModel))]
         [SwaggerResponse((int)HttpStatusCode.Unauthorized, "Unauthorized")]
         public async Task<IActionResult> Delete(Guid id)
@@ -120,11 +122,14 @@ namespace MailingList.Api.Controllers
             try
             {
                 var userId = HttpContext.GetUserId();
-                return Ok(await _mediator.Send(new DeleteMailingGroupCommand()
+                await _mediator.Send(new DeleteMailingGroupCommand()
                 {
                     UserId = userId,
                     MailingGroupId = id,
-                }));
+                });
+
+                return NoContent();
+
             }
             catch (Exception ex)
             {

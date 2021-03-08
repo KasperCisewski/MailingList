@@ -25,6 +25,7 @@
         MailingEmailGrourExist,
         CannotFindMailingEmail,
         NewNameAndOldNameShouldBeDifferent,
-        CannotFindMailingGroup
+        CannotFindMailingGroup,
+        CouldNotFindMailingEmail
     }
 }

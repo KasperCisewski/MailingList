@@ -86,7 +86,7 @@ namespace MailingList.Api.Controllers
         /// <returns></returns>
         [HttpPut("{id}")]
         [Authorize]
-        [SwaggerResponse((int)HttpStatusCode.OK, type: typeof(void))]
+        [SwaggerResponse((int)HttpStatusCode.NoContent, type: typeof(void))]
         [SwaggerResponse((int)HttpStatusCode.BadRequest, "Bad Request", typeof(ApiErrorResultModel))]
         [SwaggerResponse((int)HttpStatusCode.Unauthorized, "Unauthorized")]
         public async Task<IActionResult> Update(Guid id, [FromBody] MailingEmailRequestModel request)
@@ -117,7 +117,7 @@ namespace MailingList.Api.Controllers
         /// <returns></returns>
         [HttpDelete("{id}")]
         [Authorize]
-        [SwaggerResponse((int)HttpStatusCode.OK, type: typeof(void))]
+        [SwaggerResponse((int)HttpStatusCode.NoContent, type: typeof(void))]
         [SwaggerResponse((int)HttpStatusCode.BadRequest, "Bad Request", typeof(ApiErrorResultModel))]
         [SwaggerResponse((int)HttpStatusCode.Unauthorized, "Unauthorized")]
         public async Task<IActionResult> Delete(Guid id)
