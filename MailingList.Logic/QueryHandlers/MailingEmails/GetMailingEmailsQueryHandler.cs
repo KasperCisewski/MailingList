@@ -35,7 +35,7 @@ namespace MailingList.Logic.QueryHandlers.MailingEmails
                 .Select(meg => new MailingEmailModel()
                 {
                     Email = meg.MailingEmail.Email,
-                    Id = meg.Id
+                    Id = meg.MailingEmailId
                 });
         }
     }
