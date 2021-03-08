@@ -1,8 +1,14 @@
 ﻿using MailingList.Tests.Integration.Controllers.Base;
+using Xunit;
 
 namespace MailingList.Tests.Integration.Controllers
 {
-    class IdentityControllerTests : BaseController
+    public class IdentityControllerTests : BaseController
     {
+        [Fact]
+        public void Test()
+        {
+
+        }
     }
 }

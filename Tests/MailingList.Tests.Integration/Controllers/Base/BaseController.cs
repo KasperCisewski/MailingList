@@ -1,5 +1,6 @@
 ﻿using MailingList.Api;
 using MailingList.Data;
+using MailingList.Tests.Integration.Infrastructure.Seeder;
 using MailingList.Tests.Integration.Infrastructure.Validators;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
@@ -17,7 +18,7 @@ namespace MailingList.Tests.Integration.Controllers.Base
 
         public BaseController()
         {
-            Task.WaitAll(Task.Run(() =>
+            Task.WaitAll(Task.Run(async () =>
             {
                 Server = new TestServer(new WebHostBuilder()
                             .UseEnvironment("Test")
@@ -25,6 +26,8 @@ namespace MailingList.Tests.Integration.Controllers.Base
                             );
                 Host = Server.Host;
                 ApiRequestValidator = new ApiRequestValidator();
+                var basicDataSeeder = new BasicDataSeeder(Host, ApiRequestValidator);
+                await basicDataSeeder.SeedBasicDataViaApi();
             }));
         }
 

@@ -2,7 +2,7 @@
 
 namespace MailingList.Tests.Integration.Controllers
 {
-    class MailingEmailControllerTests : BaseController
+    public class MailingEmailControllerTests : BaseController
     {
     }
 }

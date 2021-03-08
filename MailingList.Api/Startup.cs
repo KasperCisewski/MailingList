@@ -25,6 +25,8 @@ namespace MailingList.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton(_configuration);
+
             services.AddCors();
 
             services.AddControllers()
