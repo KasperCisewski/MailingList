@@ -7,12 +7,10 @@ namespace MailingList.Logic.Services.Implementation
     internal class MailingGroupService : IMailingGroupService
     {
         private readonly IMailingGroupRepository _mailingGroupRepository;
-        private readonly IMailingEmailGroupRepository _mailingEmailGroupRepository;
 
-        public MailingGroupService(IMailingGroupRepository mailingGroupRepository, IMailingEmailGroupRepository mailingEmailGroupRepository)
+        public MailingGroupService(IMailingGroupRepository mailingGroupRepository)
         {
             _mailingGroupRepository = mailingGroupRepository;
-            _mailingEmailGroupRepository = mailingEmailGroupRepository;
         }
 
         public void CheckMailingGroupIsUnique(string name)
