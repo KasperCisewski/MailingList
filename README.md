@@ -43,5 +43,6 @@ Swagger should be open in new instance of your browser
 
 ```
 After registration token should be places in pattern as we can see on image.
-![Alt text](images/TokenPattern.jpg?raw=true "Swagger")
 ```
+
+![Alt text](images/TokenPattern.jpg?raw=true "Swagger")
