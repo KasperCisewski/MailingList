@@ -5,7 +5,7 @@ using System.Security.Claims;
 
 namespace MailingList.Api.Infrastructure.Extensions
 {
-    public static class ControllerExtension
+    public static class HttpContextExtension
     {
         public static Guid GetUserId(this HttpContext httpContext)
         {
