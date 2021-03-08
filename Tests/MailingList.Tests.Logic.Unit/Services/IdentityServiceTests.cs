@@ -1,6 +1,5 @@
 ﻿using MailingList.Data.Domains;
 using MailingList.Data.Repository.Abstraction;
-using MailingList.Data.Repository.Implementation;
 using MailingList.Logic.Services.Implementation;
 using Moq;
 using System.Collections.Generic;
